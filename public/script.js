@@ -4,7 +4,7 @@ const socket = io("/");
 const myPeer = new Peer(undefined, {
     path: "/peerjs",
     host: "/",
-    port: "3030",
+    port: "443",
 });
 const peers = {};
 
@@ -124,7 +124,7 @@ navigator.mediaDevices
             scrollToBottom();
         });
 
-        let text = $("input");
+        const text = $("input");
         $("html").keydown((e) => {
             if (e.which === 13 && text.val().length !== 0) {
                 socket.emit("message", text.val());
