@@ -5,19 +5,19 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev:server" : "nodemon --exec babel-node server"
+    "dev:server": "nodemon --exec babel-node server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "ejs": "^3.1.3",
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
     "peer": "^0.5.3",
     "peerjs": "^1.3.1",
     "socket.io": "^2.3.0",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
