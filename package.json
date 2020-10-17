@@ -11,6 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.1",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
     "cors": "^2.8.5",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
@@ -20,10 +24,6 @@
     "uuid": "^8.3.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/node": "^7.12.1",
-    "@babel/polyfill": "^7.12.1",
-    "@babel/preset-env": "^7.12.1",
     "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
