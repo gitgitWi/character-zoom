@@ -4,7 +4,7 @@ const socket = io("/");
 const myPeer = new Peer(undefined, {
     path: "/peerjs",
     host: "/",
-    port: "443",
+    port: "3030",
 });
 const peers = {};
 
@@ -89,6 +89,14 @@ const playStop = () => {
     }
 };
 
+socket.on("user-disconnected", (userId) => {
+    if (peers[userId]) peers[userId].close();
+});
+
+myPeer.on("open", (id) => {
+    socket.emit("join-room", ROOM_ID, id);
+});
+
 navigator.mediaDevices
     .getUserMedia({
         video: true,
@@ -119,16 +127,8 @@ navigator.mediaDevices
         let text = $("input");
         $("html").keydown((e) => {
             if (e.which === 13 && text.val().length !== 0) {
-                socket.emit("createMessage", text.val());
+                socket.emit("message", text.val());
                 text.val("");
             }
         });
     });
-
-socket.on("user-disconnected", (userId) => {
-    if (peers[userId]) peers[userId].close();
-});
-
-myPeer.on("open", (id) => {
-    socket.emit("join-room", ROOM_ID, id);
-});
