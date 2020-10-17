@@ -1,42 +1,38 @@
-const express = require('express')
-const app = express()
-// const cors = require('cors')
-// app.use(cors())
-const server = require('http').Server(app)
-const io = require('socket.io')(server)
-const { ExpressPeerServer } = require('peer');
+import express from "express";
+import http from "http";
+import cors from "cors";
+import socket from "socket.io";
+import { ExpressPeerServer } from "peer";
+import room from "./routes";
+
+const app = express();
+const server = http.Server(app);
+const io = socket(server);
 const peerServer = ExpressPeerServer(server, {
-  debug: true
+    debug: true,
 });
-const { v4: uuidV4 } = require('uuid')
 
-app.use('/peerjs', peerServer);
+app.use(cors());
+app.use("/peerjs", peerServer);
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use("/", room);
 
-app.set('view engine', 'ejs')
-app.use(express.static('public'))
+io.on("connection", (socket) => {
+    socket.on("join-room", (roomId, userId) => {
+        socket.join(roomId);
+        socket.to(roomId).broadcast.emit("user-connected", userId);
+        socket.on("message", (message) => {
+            io.to(roomId).emit("createMessage", message);
+        });
 
-app.get('/', (req, res) => {
-  res.redirect(`/${uuidV4()}`)
-})
+        socket.on("disconnect", () => {
+            socket.to(roomId).broadcast.emit("user-disconnected", userId);
+        });
+    });
+});
 
-app.get('/:room', (req, res) => {
-  res.render('room', { roomId: req.params.room })
-})
-
-io.on('connection', socket => {
-  socket.on('join-room', (roomId, userId) => {
-    socket.join(roomId)
-    socket.to(roomId).broadcast.emit('user-connected', userId);
-    // messages
-    socket.on('message', (message) => {
-      //send message to the same room
-      io.to(roomId).emit('createMessage', message)
-  }); 
-
-    socket.on('disconnect', () => {
-      socket.to(roomId).broadcast.emit('user-disconnected', userId)
-    })
-  })
-})
-
-server.listen(process.env.PORT||3030)
+const PORT = process.env.PORT || 3030;
+server.listen(PORT, () => {
+    console.log(`Server Listening on ${PORT}`);
+});
