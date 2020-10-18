@@ -33,6 +33,12 @@
     <body>
         <div class="main">
             <div class="main__left">
+                <div class="main__class_name">
+                    <div class="main__class_name__text">
+                        3학년 4반 2교시 국어시간
+                        <img src="./imgs/deco.png" />
+                    </div>
+                </div>
                 <div class="main__videos">
                     <div id="video-grid"></div>
                 </div>
@@ -43,33 +49,47 @@
                             class="main__controls__button main__mute_button"
                         >
                             <i class="fas fa-microphone"></i>
-                            <span>Mute</span>
+                            <span>음소거</span>
                         </div>
                         <div
                             onclick="playStop()"
                             class="main__controls__button main__video_button"
                         >
                             <i class="fas fa-video"></i>
-                            <span>Stop Video</span>
+                            <span>비디오 중지</span>
+                        </div>
+                    </div>
+                    <div class="main__controls__block">
+                        <div
+                            class="main__controls__button"
+                            id="controls__question"
+                        >
+                            <i class="far fa-comment-dots"></i>
+                            <span>질문하기</span>
+                        </div>
+                        <div
+                            class="main__controls__button"
+                            id="controls__presentation"
+                        >
+                            <i class="far fa-hand-paper"></i>
+                            <span>발표하기</span>
+                        </div>
+                        <div
+                            class="main__controls__button"
+                            id="controls_notice"
+                        >
+                            <i class="fas fa-tasks"></i>
+                            <span>알림장</span>
                         </div>
                     </div>
                     <div class="main__controls__block">
                         <div class="main__controls__button">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Security</span>
+                            <i class="far fa-check-circle"></i>
+                            <span class="attendance_check">출석체크</span>
                         </div>
                         <div class="main__controls__button">
-                            <i class="fas fa-user-friends"></i>
-                            <span>Participants</span>
-                        </div>
-                        <div class="main__controls__button">
-                            <i class="fas fa-comment-alt"></i>
-                            <span>Chat</span>
-                        </div>
-                    </div>
-                    <div class="main__controls__block">
-                        <div class="main__controls__button">
-                            <span class="leave_meeting">Leave Meeting</span>
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="leave_meeting">강의실 나가기</span>
                         </div>
                     </div>
                 </div>
